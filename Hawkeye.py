@@ -118,7 +118,7 @@ class Statistics(Resource):
         results = list(leakage_col.aggregate(pipeline))
         if not len(results):
             pipeline = [
-                {'$group': {'_id': '$tag', 'value': {'$sum': 0}}},
+                {'$group': {'_id': '$tag', 'value': {'$sum': 0}}},{'$sort':{'value':-1}}
             ]
             results = list(leakage_col.aggregate(pipeline))
         return jsonify({'status': 200, 'msg': '获取信息成功', 'result': results})
